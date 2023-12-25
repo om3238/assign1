@@ -11,7 +11,7 @@
             margin-top: 20px;
         }
         th, td {
-            border: 1px solid #dddddd;
+            border: 1px solid;
             text-align: left;
             padding: 8px;
         }
@@ -33,46 +33,10 @@
             </tr>
         </thead>
         <tbody id="productBody">
-            <!-- Product data will be displayed here -->
         </tbody>
     </table>
 
-    <script>
-        // Function to fetch and display product data
-        async function fetchAndDisplayData() {
-            try {
-                // Fetch JSON data from the provided API
-                const response = await fetch('https://s3.amazonaws.com/open-to-cors/assignment.json');
-                const data = await response.json();
-                
-                // Extract product data from JSON
-                const products = data.products;
-
-                // Sort products by descending popularity
-                const sortedProducts = Object.keys(products).sort((a, b) => {
-                    return products[b].popularity - products[a].popularity;
-                });
-
-                // Display sorted products in the table
-                const tableBody = document.getElementById('productBody');
-                tableBody.innerHTML = '';
-
-                sortedProducts.forEach(productId => {
-                    const product = products[productId];
-                    const row = `<tr>
-                                    <td>${product.title}</td>
-                                    <td>${product.price}</td>
-                                    <td>${product.popularity}</td>
-                                </tr>`;
-                    tableBody.innerHTML += row;
-                });
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        }
-
-        // Call the function to fetch and display data when the page loads
-        fetchAndDisplayData();
+    <script src="fetch.js">
     </script>
 </body>
 </html>
